@@ -6,10 +6,6 @@ import { useLocation, useParams } from 'react-router-dom'
 const BookDetails = () => {
 
   let bookData = useLocation();
-  
-  function testing() {
-    console.log(book)
-  }
 
   const [book, setBook] = useState({});
   const {id} = useParams();
@@ -42,20 +38,24 @@ const BookDetails = () => {
     }, []);
 
   return (
-    <div className='bg-white text-black flex flex-col gap-2'>
+    <div className='bg-neutral-200 h-screen w-screen text-black flex flex-col gap-2 pt-16 px-5 items-center'>
 
       
-      <img src={book.cover} alt='cover' className='w-12'/>
-      <p>{book.title}</p>
-      <p>{book.description}</p>
-      <p>{book.first_published}</p>
+      <img src={book.cover} alt='cover' className='w-1/3'/>
 
-      
-      <p>{book.rating}</p>
-      <p>{book.author}</p>
+      <div className='flex flex-col w-full text-center'>
+
+        <p className='font-extrabold text-2xl'>{book.title}</p>
+        <p className='font-semibold text-xl'>{book.author}</p>
+        <p className='break-words'>{book.description}</p>
+        <p>{book.first_published}</p>
+
+        
+        <p>{book.rating}</p>
       
 
-      <button onClick={testing} className=''>testing</button>
+      </div>
+    
       
     
     </div>

@@ -23,8 +23,8 @@ const SearchBook = () => {
                 return {
                     id: key.replace('/works/', ''),
                     title: title, 
-                    author: author_name ? author_name : "author not found",
-                    rating: ratings_average ? Math.round(ratings_average * 100) / 100 : 0,
+                    author: author_name ? author_name[0] : "author not found",
+                    rating: ratings_average ? Math.round(ratings_average * 10) / 10 : 0,
                     cover: cover_i ? `https://covers.openlibrary.org/b/id/${cover_i}-M.jpg` : coverImage,
                     first_published: first_publish_year ? first_publish_year : "publish year not found",
                 }
@@ -40,13 +40,15 @@ const SearchBook = () => {
   
 
   return (
-        <div className='flex h-screen w-screen bg-white'>
-            <div className='flex w-screen h-max items-center bg-white flex-col p-8 gap-10'>
+        <div className='flex h-full min-h-screen w-screen bg-neutral-200'>
+            <div className='flex w-screen h-max items-center flex-col py-8 px-5 gap-10'>
+
+            <p className='font-bold text-3xl'>Search a book</p>
 
                 <div className='flex gap-2 justify-center items-center w-full relative'>
 
                     <input
-                    className='bg-white p-2 pl-3 border border-black rounded-3xl text-black w-full active:outline-0 focus:outline-0'
+                    className='bg-neutral-200 p-2 pl-3 border border-black rounded-3xl text-black w-full focus:outline-0'
                     type="text"
                     id="text"
                     name="text"

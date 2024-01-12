@@ -9,6 +9,16 @@ const SearchBook = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [books, setBooks] = useState([]);
 
+  useEffect(()=> {
+    const prevBooks = window.sessionStorage.getItem('books');
+
+    if(prevBooks) {
+        setBooks(JSON.parse(prevBooks));
+    }
+
+  }, [])
+
+
   const fetchBooks = async () => {
         try {
             const response = await fetch(`https://openlibrary.org/search.json?q=${searchTerm}`);
@@ -20,6 +30,7 @@ const SearchBook = () => {
                 
                 const {cover_i, title, author_name, first_publish_year, key, ratings_average} = book;
 
+
                 return {
                     id: key.replace('/works/', ''),
                     title: title, 
@@ -29,8 +40,10 @@ const SearchBook = () => {
                     first_published: first_publish_year ? first_publish_year : "publish year not found",
                 }
             });
+
             setBooks(books);
-        
+            window.sessionStorage.setItem('books', JSON.stringify(books));
+            
         } catch (error) {
             console.log(error);
         }
